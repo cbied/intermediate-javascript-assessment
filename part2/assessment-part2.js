@@ -15,11 +15,11 @@
     {
       data: [
         {
-      		email: "awilliams0@intel.com",
-      		first_name: "Alan",
-      		gender: "Male",
-      		id: 1,
-      		last_name: "Williams"
+          email: "awilliams0@intel.com",
+          first_name: "Alan",
+          gender: "Male",
+          id: 1,
+          last_name: "Williams"
         },
         {
           //...
@@ -44,7 +44,13 @@ function noWeakLink() {
     url: '/api/users'
   })
   // CODE HERE...
-
+  .then((response)=>{
+    firstUser=response.data[0];
+      return response; 
+  }).then((response)=>{
+    thirdUser=response.data[2];
+  return response.data[9];
+})
 }
 
 
@@ -75,6 +81,7 @@ function large() {
 }
 // CODE HERE...
 
+boundToElephant = large.bind(elephant)
 
 
 // *************
@@ -88,7 +95,9 @@ function large() {
 // and return the bound function.
 
 // CODE HERE...
-
+function deathStar(capacity,crew) {
+  return capacity.bind(crew)
+}
 
 
 // *************
@@ -103,7 +112,11 @@ function large() {
 // The closure function will return the combined value of assets and liabilities.
 
 // CODE HERE...
-
+function accountingOffice(assets) {
+  return (liabilities) => {
+    return assets + liabilities
+  }
+}
 
 
 // *************
@@ -128,6 +141,15 @@ function large() {
 // };
 
 // CODE HERE...
+function forgetter(name) {
+  let remember = [];
+
+  return function(item) {
+    remember.push(item)
+    return {name, remember}
+  }
+}
+
 
 
 
@@ -156,3 +178,27 @@ function large() {
 // NOTE: Neither hunger nor danger should be able to exceed 100 or drop below 0.
 
 // CODE HERE...
+function frodo(startingHungerValue,startingDangerValue) {
+  return {
+    dinnerOverFire: function(){
+      return {hunger: startingHungerValue = startingHungerValue <= 25 ?
+              0
+              :
+              startingHungerValue - 25,
+              danger: startingDangerValue = startingDangerValue >= 60 ? 
+              100
+              :
+              startingDangerValue + 40}
+    },
+    hidingInBush: function(){
+      return {hunger: startingHungerValue = startingHungerValue >= 65 ?
+              100
+              : 
+              startingHungerValue + 35,
+              danger: startingDangerValue = startingDangerValue <= 20 ? 
+              0
+              :
+              startingDangerValue - 20}
+    }
+  }
+}
